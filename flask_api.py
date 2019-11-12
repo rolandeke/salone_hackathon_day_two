@@ -17,15 +17,10 @@ app = Flask(__name__)
 
 username = "pdtpatrick"
 password = "u3!WL2uC0dxu"
-# in seconds
 current_time = int(time.time()) #currentTime in second
 start_time   =  3600 * 48 # 48h in the past  
 end_time = int(time.time())
-# airport code
-# airport = "KSEA" # Frankfurt
-
-
-airport = "EDDF"  # Frankfurt
+airport = "KSEA"  # Frankfurt
 
 
 def read_airport(filename: str) -> Dict[str, str]:
@@ -154,7 +149,8 @@ def process_flights(start_time: int, end_time: int) -> List[Dict[str, str]]:
         arrival = flight['estArrivalAirport']
         
         #append them to the list in a dictionary object
-        outputData.append({dept : arrival})
+        if dept != arrival and arrival != None:
+            outputData.append({dept : arrival})
               
     #return output in json format
     return json.dumps(outputData)
